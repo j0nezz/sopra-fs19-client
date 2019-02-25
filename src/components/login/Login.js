@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { BaseContainer } from "../../helpers/layout";
 import { getDomain } from "../../helpers/getDomain";
 import User from "../shared/models/User";
-import { withRouter } from "react-router-dom";
+import {NavLink, withRouter} from "react-router-dom";
 import { Button } from "../../views/design/Button";
 
 const FormContainer = styled.div`
@@ -56,6 +56,16 @@ const ButtonContainer = styled.div`
   margin-top: 20px;
 `;
 
+const RegisterLabel = styled.div`
+  color: white;
+  margin-bottom: 10px;
+  padding: 10px;
+  text-align: center;
+  a.color:
+  
+`;
+
+
 /**
  * Classes in React allow you to have an internal state within the class and to have the React life-cycle for your component.
  * You should have a class (instead of a functional component) when:
@@ -84,20 +94,19 @@ class Login extends React.Component {
    * If the request is successful, a new user is returned to the front-end and its token is stored in the localStorage.
    */
   login() {
-    fetch(`${getDomain()}/users`, {
+    fetch(`${getDomain()}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
         username: this.state.username,
-        name: this.state.name
+        password: this.state.password
       })
     })
       .then(response => response.json())
       .then(returnedUser => {
         const user = new User(returnedUser);
-        // store the token into the local storage
         localStorage.setItem("token", user.token);
         // user login successfully worked --> navigate to the route /game in the GameRouter
         this.props.history.push(`/game`);
@@ -143,16 +152,16 @@ class Login extends React.Component {
                 this.handleInputChange("username", e.target.value);
               }}
             />
-            <Label>Name</Label>
+            <Label>Password</Label>
             <InputField
-              placeholder="Enter here.."
+                type="password"
               onChange={e => {
-                this.handleInputChange("name", e.target.value);
+                this.handleInputChange("password", e.target.value);
               }}
             />
             <ButtonContainer>
               <Button
-                disabled={!this.state.username || !this.state.name}
+                disabled={!this.state.username || !this.state.password}
                 width="50%"
                 onClick={() => {
                   this.login();
@@ -161,6 +170,11 @@ class Login extends React.Component {
                 Login
               </Button>
             </ButtonContainer>
+
+            <RegisterLabel>
+              Don't have an account yet?
+              <NavLink to="/register"  activeStyle={{ color: 'white' }} >Sign up here.</NavLink>
+            </RegisterLabel>
           </Form>
         </FormContainer>
       </BaseContainer>
