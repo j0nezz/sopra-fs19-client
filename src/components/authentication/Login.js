@@ -3,8 +3,9 @@ import styled from "styled-components";
 import { BaseContainer } from "../../helpers/layout";
 import { getDomain } from "../../helpers/getDomain";
 import User from "../shared/models/User";
-import {NavLink, withRouter} from "react-router-dom";
+import {withRouter} from "react-router-dom";
 import { Button } from "../../views/design/Button";
+import {ButtonContainer, InputField, Label, RegisterLabel, StyledNavLink} from "./SharedElements";
 
 const FormContainer = styled.div`
   margin-top: 2em;
@@ -29,43 +30,6 @@ const Form = styled.div`
   background: linear-gradient(rgb(27, 124, 186), rgb(2, 46, 101));
   transition: opacity 0.5s ease, transform 0.5s ease;
 `;
-
-const InputField = styled.input`
-  &::placeholder {
-    color: rgba(255, 255, 255, 0.2);
-  }
-  height: 35px;
-  padding-left: 15px;
-  margin-left: -4px;
-  border: none;
-  border-radius: 20px;
-  margin-bottom: 20px;
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-`;
-
-const Label = styled.label`
-  color: white;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-`;
-
-const RegisterLabel = styled.div`
-  color: white;
-  margin-bottom: 10px;
-  padding: 10px;
-  text-align: center;
-  a.color:
-  
-`;
-
-
 /**
  * Classes in React allow you to have an internal state within the class and to have the React life-cycle for your component.
  * You should have a class (instead of a functional component) when:
@@ -108,7 +72,7 @@ class Login extends React.Component {
       .then(returnedUser => {
         const user = new User(returnedUser);
         localStorage.setItem("token", user.token);
-        // user login successfully worked --> navigate to the route /game in the GameRouter
+        // user authentication successfully worked --> navigate to the route /game in the GameRouter
         this.props.history.push(`/game`);
       })
       .catch(err => {
@@ -173,7 +137,7 @@ class Login extends React.Component {
 
             <RegisterLabel>
               Don't have an account yet?
-              <NavLink to="/register"  activeStyle={{ color: 'white' }} >Sign up here.</NavLink>
+              <StyledNavLink to="/register"  activeStyle={{ color: 'white' }} >Sign up here.</StyledNavLink>
             </RegisterLabel>
           </Form>
         </FormContainer>
