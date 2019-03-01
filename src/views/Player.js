@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import {StyledNavLink} from "../components/authentication/SharedElements";
 
 const Container = styled.div`
   margin: 6px 0;
@@ -38,8 +39,10 @@ const Id = styled.div`
 const Player = ({ user }) => {
   return (
     <Container>
-      <Name>{user.name}</Name> <UserName>{user.username}</UserName>
+        <Name>{user.name}</Name>
+        <StyledNavLink to={`/user/${user.id}`}><UserName>{user.username}</UserName></StyledNavLink>
       <Id>Id: {user.id}</Id>
+
     </Container>
   );
 };
