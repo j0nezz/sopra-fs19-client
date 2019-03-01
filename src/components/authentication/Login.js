@@ -3,33 +3,26 @@ import styled from "styled-components";
 import { BaseContainer } from "../../helpers/layout";
 import { getDomain } from "../../helpers/getDomain";
 import User from "../shared/models/User";
-import {withRouter} from "react-router-dom";
-import { Button } from "../../views/design/Button";
-import {ButtonContainer, InputField, Label, RegisterLabel, StyledNavLink} from "./SharedElements";
+import { withRouter } from "react-router-dom";
+import {
+  Card,
+  CardContent,
+  Divider,
+  TextField,
+  Typography
+} from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import {
+  LoginCard,
+  RegisterLabel,
+  StyledNavLink,
+  TitleContainer
+} from "./SharedElements";
+import { withTheme } from "@material-ui/core/styles/withTheme";
+import Lock from "@material-ui/icons/Lock";
+import NavLink from "react-router-dom/es/NavLink";
+import Link from "@material-ui/core/Link";
 
-const FormContainer = styled.div`
-  margin-top: 2em;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 300px;
-  justify-content: center;
-`;
-
-const Form = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 60%;
-  height: 375px;
-  font-size: 16px;
-  font-weight: 300;
-  padding-left: 37px;
-  padding-right: 37px;
-  border-radius: 5px;
-  background: linear-gradient(rgb(27, 124, 186), rgb(2, 46, 101));
-  transition: opacity 0.5s ease, transform 0.5s ease;
-`;
 /**
  * Classes in React allow you to have an internal state within the class and to have the React life-cycle for your component.
  * You should have a class (instead of a functional component) when:
@@ -106,42 +99,52 @@ class Login extends React.Component {
 
   render() {
     return (
-      <BaseContainer>
-        <FormContainer>
-          <Form>
-            <Label>Username</Label>
-            <InputField
-              placeholder="Enter here.."
-              onChange={e => {
-                this.handleInputChange("username", e.target.value);
-              }}
-            />
-            <Label>Password</Label>
-            <InputField
-                type="password"
-              onChange={e => {
-                this.handleInputChange("password", e.target.value);
-              }}
-            />
-            <ButtonContainer>
-              <Button
-                disabled={!this.state.username || !this.state.password}
-                width="50%"
-                onClick={() => {
-                  this.login();
-                }}
-              >
-                Login
-              </Button>
-            </ButtonContainer>
-
-            <RegisterLabel>
-              Don't have an account yet?
-              <StyledNavLink to="/register"  activeStyle={{ color: 'white' }} >Sign up here.</StyledNavLink>
-            </RegisterLabel>
-          </Form>
-        </FormContainer>
-      </BaseContainer>
+      <LoginCard>
+        <CardContent>
+          <TitleContainer>
+            <Lock style={{ fontSize: 40 }} />
+            <Typography variant="h4"> Login</Typography>
+          </TitleContainer>
+          <TextField
+            margin="normal"
+            label="Username"
+            fullWidth
+            onChange={e => {
+              this.handleInputChange("username", e.target.value);
+            }}
+          />
+          <TextField
+            type="password"
+            label="Password"
+            fullWidth
+            onChange={e => {
+              this.handleInputChange("password", e.target.value);
+            }}
+          />
+          <Button
+            style={{ marginTop: 20 }}
+            fullWidth
+            variant="contained"
+            color="primary"
+            margin="normal"
+            disabled={!this.state.username || !this.state.password}
+            width="50%"
+            onClick={() => {
+              this.login();
+            }}
+          >
+            Login
+          </Button>
+          <Divider />
+          <Typography style={{ marginTop: 20 }} variant="subtitle1">
+            Don't have an Account?{" "}
+            <Link component={NavLink} to={"/register"}>
+              {" "}
+              Sign up{" "}
+            </Link>
+          </Typography>
+        </CardContent>
+      </LoginCard>
     );
   }
 }

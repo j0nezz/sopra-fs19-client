@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { ReactLogo } from "./ReactLogo";
+import {AppBar} from "@material-ui/core";
+import Toolbar from "@material-ui/core/Toolbar";
 
 /**
  * Using styled-components you can visual HTML primitives and use props with it!
@@ -19,7 +21,9 @@ const Container = styled.div`
 const Title = styled.h1`
   font-weight: bold;
   color: white;
-  text-align: center;
+`;
+const StyledAppbar = styled(AppBar) `
+  align-items: center;
 `;
 /**
  * This is an example of a Functional and stateless component (View) in React. Functional components are not classes and thus don't handle internal state changes.
@@ -31,10 +35,12 @@ const Title = styled.h1`
  */
 const Header = props => {
   return (
-    <Container height={props.height}>
-      <Title>SoPra FS19 rocks with React!</Title>
-      <ReactLogo width={60} height={60} />
-    </Container>
+      <StyledAppbar position="relative">
+          <Toolbar>
+              <ReactLogo width="60" height="60"/>
+            <Title>SoPra FS19 rocks with React and Material UI!</Title>
+          </Toolbar>
+      </StyledAppbar>
   );
 };
 

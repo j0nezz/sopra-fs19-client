@@ -1,5 +1,6 @@
-import styled from 'styled-components';
-import {NavLink} from "react-router-dom";
+import styled from "styled-components";
+import { NavLink } from "react-router-dom";
+import { Card } from "@material-ui/core";
 
 export const InputField = styled.input`
   &::placeholder {
@@ -31,13 +32,22 @@ export const RegisterLabel = styled.div`
   color: white;
   margin-bottom: 10px;
   padding: 10px;
-  text-align: center;  
+  text-align: center;
 `;
 
 export const StyledNavLink = styled(NavLink)`
-  :hover{
+  :hover {
     color: #ffffff;
   }
-  color: #6B89AB;
+  color: #6b89ab;
   text-decoration: none;
+`;
+export const LoginCard = styled(Card)`
+  max-width: 300px;
+  margin: auto;
+  margin-top: 20px;
+`;
+
+export const TitleContainer = styled.div`
+  display: flex;
 `;

@@ -40,24 +40,11 @@ class AppRouter extends React.Component {
               )}
             />
 
-              <Route
-                  path="/register"
-                  exact
-                  render={() => (
-                      <Register />
-                  )}
-              />
+            <Route path="/register" exact render={() => <Register />} />
 
-              <Route
-                  path="/profile/:userId"
-                  exact
-                  render={() => (
-                      <Profile />
-                  )}
-              />
+            <Route path="/profile/:userId" exact render={() => <Profile />} />
 
             <Route path="/" exact render={() => <Redirect to={"/game"} />} />
-
           </div>
         </Switch>
       </BrowserRouter>
@@ -65,6 +52,6 @@ class AppRouter extends React.Component {
   }
 }
 /*
-* Don't forget to export your component!
+ * Don't forget to export your component!
  */
 export default AppRouter;
