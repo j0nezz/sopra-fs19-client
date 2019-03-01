@@ -1,24 +1,10 @@
 import React from "react";
-import styled from "styled-components";
-import { BaseContainer } from "../../helpers/layout";
 import { getDomain } from "../../helpers/getDomain";
 import User from "../shared/models/User";
 import { withRouter } from "react-router-dom";
-import {
-  Card,
-  CardContent,
-  Divider,
-  TextField,
-  Typography
-} from "@material-ui/core";
+import { CardContent, Divider, TextField, Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import {
-  LoginCard,
-  RegisterLabel,
-  StyledNavLink,
-  TitleContainer
-} from "./SharedElements";
-import { withTheme } from "@material-ui/core/styles/withTheme";
+import { LoginCard, TitleContainer } from "./SharedElements";
 import Lock from "@material-ui/icons/Lock";
 import NavLink from "react-router-dom/es/NavLink";
 import Link from "@material-ui/core/Link";

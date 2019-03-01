@@ -2,26 +2,22 @@ import React from "react";
 import styled from "styled-components";
 import { BaseContainer } from "../../helpers/layout";
 import { getDomain } from "../../helpers/getDomain";
-import Player from "../../views/Player";
-import { Spinner } from "../../views/design/Spinner";
-import { Button } from "../../views/design/Button";
 import { withRouter } from "react-router-dom";
+import { List, Typography } from "@material-ui/core";
+import Player from "./Player";
+import Button from "@material-ui/core/Button";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const Container = styled(BaseContainer)`
+  margin-top: 20px;
   color: white;
   text-align: center;
+  min-width: 300px;
 `;
 
 const Users = styled.ul`
   list-style: none;
   padding-left: 0;
-`;
-
-const PlayerContainer = styled.li`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 `;
 
 class Game extends React.Component {
@@ -62,22 +58,22 @@ class Game extends React.Component {
   render() {
     return (
       <Container>
-        <h2>Happy Coding! </h2>
-        <p>Get all users from secure end point:</p>
+        <Typography variant="h4">Userlist</Typography>
         {!this.state.users ? (
-          <Spinner />
+          <CircularProgress />
         ) : (
           <div>
             <Users>
-              {this.state.users.map(user => {
-                return (
-                  <PlayerContainer key={user.id}>
-                    <Player user={user} />
-                  </PlayerContainer>
-                );
-              })}
+              <List>
+                {this.state.users.map(user => {
+                  return <Player user={user} key={user.id} />;
+                })}
+              </List>
             </Users>
             <Button
+              fullWidth
+              variant="contained"
+              color="secondary"
               width="100%"
               onClick={() => {
                 this.logout();

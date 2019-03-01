@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { ReactLogo } from "./ReactLogo";
-import {AppBar} from "@material-ui/core";
+import { AppBar } from "@material-ui/core";
 import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import AccountCircle from "@material-ui/icons/AccountCircle";
 
 /**
  * Using styled-components you can visual HTML primitives and use props with it!
@@ -10,19 +12,13 @@ import Toolbar from "@material-ui/core/Toolbar";
  * Using styled-components, you can have styling conditions using the following syntax: ${props => ...}
  * https://www.styled-components.com/
  */
-const Container = styled.div`
-  height: ${props => props.height}px;
-  background: ${props => props.background};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 
 const Title = styled.h1`
   font-weight: bold;
   color: white;
+  flex: 1;
 `;
-const StyledAppbar = styled(AppBar) `
+const StyledAppbar = styled(AppBar)`
   align-items: center;
 `;
 /**
@@ -35,12 +31,17 @@ const StyledAppbar = styled(AppBar) `
  */
 const Header = props => {
   return (
-      <StyledAppbar position="relative">
-          <Toolbar>
-              <ReactLogo width="60" height="60"/>
-            <Title>SoPra FS19 rocks with React and Material UI!</Title>
-          </Toolbar>
-      </StyledAppbar>
+    <AppBar position="relative">
+      <Toolbar>
+        <ReactLogo width="60" height="60" />
+        <Title>SoPra FS19 rocks with React and Material UI!</Title>
+        <div>
+          <IconButton aria-haspopup="true" color="inherit">
+            <AccountCircle />
+          </IconButton>
+        </div>
+      </Toolbar>
+    </AppBar>
   );
 };
 

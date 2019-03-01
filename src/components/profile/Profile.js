@@ -5,16 +5,29 @@ import { getDomain } from "../../helpers/getDomain";
 import { withRouter } from "react-router-dom";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
+import {
+  IconButton,
+  Link,
+  List,
+  ListItem,
+  ListItemAvatar,
+  Typography, withStyles
+} from "@material-ui/core";
+import {Cake, ChevronLeft, Create} from "@material-ui/icons";
+import { TitleContainer } from "../authentication/SharedElements";
+import ListItemText from "@material-ui/core/ListItemText";
+import Avatar from "@material-ui/core/Avatar";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import Moment from "react-moment";
+import Badge from "@material-ui/core/Badge";
 
-const Container = styled.div`
-  padding: 20px;
-  margin: 0 10em;
-  background: rgba(200, 200, 200, 0.5);
-  border-radius: 5px;
-`;
+
+const OnlineBadge = withStyles(() => ({
+  badge: { backgroundColor: "#4caf50" }
+}))(Badge);
+
 
 const StyledCard = styled(Card)`
   max-width: 300px;
@@ -29,6 +42,7 @@ class Profile extends React.Component {
   }
   componentDidMount() {
     let userId = this.props.match.params.userId;
+    console.log(userId);
 
     fetch(`${getDomain()}/users/${userId}`, {
       method: "GET",
@@ -52,16 +66,46 @@ class Profile extends React.Component {
       });
   }
   render() {
+    const { user } = this.state;
     return (
-      <Container>
-        {this.state.user.name}
-        <StyledCard>
-          <CardContent />
-          <CardActions>
-            <Button size="small">Learn More</Button>
-          </CardActions>
-        </StyledCard>
-      </Container>
+      <StyledCard>
+        <CardContent>
+          <TitleContainer>
+            <Button>
+              <ChevronLeft onClick={() => this.props.history.go(-1)} />
+            </Button>
+            <Typography variant="h6">User Details</Typography>
+          </TitleContainer>
+          <List>
+            <ListItem>
+              {user.status === "ONLINE" ? (
+                  <OnlineBadge color="primary" variant="dot">
+                    <Avatar>
+                      <AccountCircle />
+                    </Avatar>
+                  </OnlineBadge>
+              ) : (
+                  <Avatar>
+                    <AccountCircle />
+                  </Avatar>
+              )}
+              <ListItemText primary={user.name} secondary={user.username} />
+            </ListItem>
+            <ListItem>
+              <Avatar>
+                <Cake />
+              </Avatar>
+              <ListItemText primary=<Moment format="DD.MM.YYYY">{user.birthDate}</Moment> />
+            </ListItem>
+            <ListItem>
+              <Avatar>
+                <Create />
+              </Avatar>
+              <ListItemText primary=<Moment format="DD.MM.YYYY">{user.creationDate}</Moment> />
+            </ListItem>
+          </List>
+        </CardContent>
+      </StyledCard>
     );
   }
 }

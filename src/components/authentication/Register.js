@@ -1,38 +1,12 @@
 import React from "react";
-import styled from "styled-components";
-import { BaseContainer } from "../../helpers/layout";
 import { getDomain } from "../../helpers/getDomain";
 import { withRouter } from "react-router-dom";
-import { CardContent, Divider, TextField, Typography } from "@material-ui/core";
+import { CardContent, TextField, Typography } from "@material-ui/core";
 import Lock from "@material-ui/icons/Lock";
 import NavLink from "react-router-dom/es/NavLink";
 import { LoginCard, TitleContainer } from "./SharedElements";
 import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
-
-const FormContainer = styled.div`
-  margin-top: 2em;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 300px;
-  justify-content: center;
-`;
-
-const Form = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 60%;
-  height: 500px;
-  font-size: 16px;
-  font-weight: 300;
-  padding-left: 37px;
-  padding-right: 37px;
-  border-radius: 5px;
-  background: linear-gradient(rgb(27, 124, 186), rgb(2, 46, 101));
-  transition: opacity 0.5s ease, transform 0.5s ease;
-`;
 
 /**
  * Classes in React allow you to have an internal state within the class and to have the React life-cycle for your component.
@@ -56,7 +30,8 @@ class Register extends React.Component {
       name: null,
       username: null,
       password: null,
-      passwordRep: null
+      passwordRep: null,
+      birthDate: null
     };
   }
   /**
@@ -72,7 +47,8 @@ class Register extends React.Component {
       body: JSON.stringify({
         username: this.state.username,
         name: this.state.name,
-        password: this.state.password
+        password: this.state.password,
+        birthDate: this.state.birthDate
       })
     })
       .then(response => response.json())
@@ -134,6 +110,14 @@ class Register extends React.Component {
             fullWidth
             onChange={e => {
               this.handleInputChange("username", e.target.value);
+            }}
+          />
+          <TextField
+            margin="normal"
+            label="Username"
+            fullWidth
+            onChange={e => {
+              this.handleInputChange("birthDate", e.target.value);
             }}
           />
           <TextField
