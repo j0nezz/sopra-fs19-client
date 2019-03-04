@@ -39,7 +39,14 @@ class Player extends React.Component {
           {user.status === "ONLINE" ? (
             <OnlineBadge color="primary" variant="dot">
               <Avatar>
-                <AccountCircle />
+                <AccountCircle
+                  color={
+                    parseInt(user.id) ===
+                    parseInt(localStorage.getItem("userId"))
+                      ? "primary"
+                      : "inherit"
+                  }
+                />
               </Avatar>
             </OnlineBadge>
           ) : (

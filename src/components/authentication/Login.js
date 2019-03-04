@@ -51,6 +51,8 @@ class Login extends React.Component {
       .then(returnedUser => {
         const user = new User(returnedUser);
         localStorage.setItem("token", user.token);
+        localStorage.setItem("name", user.name);
+        localStorage.setItem("userId", user.id);
         // user authentication successfully worked --> navigate to the route /game in the GameRouter
         this.props.history.push(`/game`);
       })

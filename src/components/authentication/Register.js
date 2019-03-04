@@ -114,7 +114,7 @@ class Register extends React.Component {
           />
           <TextField
             margin="normal"
-            label="Username"
+            label="BirthDate"
             fullWidth
             onChange={e => {
               this.handleInputChange("birthDate", e.target.value);

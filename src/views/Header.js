@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { ReactLogo } from "./ReactLogo";
-import { AppBar } from "@material-ui/core";
+import { AppBar, Typography } from "@material-ui/core";
 import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
 import AccountCircle from "@material-ui/icons/AccountCircle";
+import Button from "@material-ui/core/Button";
 
 /**
  * Using styled-components you can visual HTML primitives and use props with it!
@@ -18,32 +18,31 @@ const Title = styled.h1`
   color: white;
   flex: 1;
 `;
-const StyledAppbar = styled(AppBar)`
-  align-items: center;
-`;
-/**
- * This is an example of a Functional and stateless component (View) in React. Functional components are not classes and thus don't handle internal state changes.
- * Conceptually, components are like JavaScript functions. They accept arbitrary inputs (called “props”) and return React elements describing what should appear on the screen.
- * They are reusable pieces, and think about each piece in isolation.
- * Functional components have to return always something. However, they don't need a "render()" method.
- * https://reactjs.org/docs/components-and-props.html
- * @FunctionalComponent
- */
-const Header = props => {
-  return (
-    <AppBar position="relative">
-      <Toolbar>
-        <ReactLogo width="60" height="60" />
-        <Title>SoPra FS19 rocks with React and Material UI!</Title>
-        <div>
-          <IconButton aria-haspopup="true" color="inherit">
-            <AccountCircle />
-          </IconButton>
-        </div>
-      </Toolbar>
-    </AppBar>
-  );
-};
+class Header extends React.Component {
+  // TODO update Component when local storage changes
+  // TODO add Links to Header (currently outside Router)
+
+  render() {
+    return (
+      <AppBar position="relative">
+        <Toolbar>
+          <ReactLogo width="60" height="60" />
+          <Title>SoPra FS19 rocks with React and Material UI!</Title>
+          {localStorage.getItem("name") ? (
+            <React.Fragment>
+              <Typography variant="h6" style={{ color: "white" }}>
+                Hi {localStorage.getItem("name")}
+              </Typography>
+              <Button aria-haspopup="true" color="inherit" to="/edit">
+                <AccountCircle />
+              </Button>
+            </React.Fragment>
+          ) : null}
+        </Toolbar>
+      </AppBar>
+    );
+  }
+}
 
 /**
  * Don't forget to export your component!

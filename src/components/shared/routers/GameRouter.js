@@ -2,8 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { Redirect, Route } from "react-router-dom";
 import Game from "../../game/Game";
-import Profile from "./AppRouter";
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
