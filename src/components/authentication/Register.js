@@ -115,7 +115,11 @@ class Register extends React.Component {
           <TextField
             margin="normal"
             label="BirthDate"
+            type="date"
             fullWidth
+            InputLabelProps={{
+              shrink: true
+            }}
             onChange={e => {
               this.handleInputChange("birthDate", e.target.value);
             }}
@@ -158,7 +162,7 @@ class Register extends React.Component {
           <Typography style={{ marginTop: 20 }} variant="subtitle1">
             Already have an Account?{" "}
             <Link component={NavLink} to={"/login"}>
-              Login
+              Sign up
             </Link>
           </Typography>
         </CardContent>
