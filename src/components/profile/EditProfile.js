@@ -10,7 +10,6 @@ import Avatar from "@material-ui/core/Avatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import CardContent from "@material-ui/core/CardContent";
 import { withRouter } from "react-router-dom";
-import Moment from "react-moment";
 
 class EditProfile extends Component {
   constructor() {
