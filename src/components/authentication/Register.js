@@ -157,12 +157,12 @@ class Register extends React.Component {
               this.register();
             }}
           >
-            Login
+            Sign up
           </Button>
           <Typography style={{ marginTop: 20 }} variant="subtitle1">
             Already have an Account?{" "}
             <Link component={NavLink} to={"/login"}>
-              Sign up
+              Login
             </Link>
           </Typography>
         </CardContent>

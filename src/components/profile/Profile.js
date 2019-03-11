@@ -26,17 +26,20 @@ class Profile extends React.Component {
     };
   }
   componentDidMount() {
-    let userId = this.props.match.params.userId;
-    console.log(userId);
+    const userId = this.props.match.params.userId;
+    const authHeaders = new Headers();
+    authHeaders.append("Content-Type", "application/json");
+    authHeaders.append("token", localStorage.getItem("token"));
 
     fetch(`${getDomain()}/users/${userId}`, {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      }
+      headers: authHeaders
     })
       .then(response => response.json())
       .then(returnedUser => {
+        if(returnedUser.status > 299){
+          alert(returnedUser.message);
+        }
         this.setState({
           user: new User(returnedUser)
         });

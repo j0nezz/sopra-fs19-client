@@ -10,30 +10,34 @@ import Avatar from "@material-ui/core/Avatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import CardContent from "@material-ui/core/CardContent";
 import { withRouter } from "react-router-dom";
+import Moment from "react-moment";
 
 class EditProfile extends Component {
   constructor() {
     super();
     this.state = {
       user: new User(),
-      username: null,
-      birthdate: null
+      username: "",
+      birthdate: new Date(0)
     };
   }
   componentDidMount() {
+    const authHeaders = new Headers();
+    authHeaders.append("Content-Type", "application/json");
+    authHeaders.append("token", localStorage.getItem("token"));
+
     const userId = localStorage.getItem("userId");
     fetch(`${getDomain()}/users/${userId}`, {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      }
+      headers: authHeaders
     })
       .then(response => response.json())
       .then(returnedUser => {
         this.setState({
-          user: new User(returnedUser)
+          user: new User(returnedUser),
+          username: returnedUser.username,
+          birthdate: returnedUser.birthDate.split("T")[0]
         });
-        console.log(this.state);
       })
       .catch(err => {
         if (err.message.match(/Failed to fetch/)) {
@@ -44,16 +48,15 @@ class EditProfile extends Component {
       });
   }
   handleInputChange(key, value) {
-    // Example: if the key is username, this statement is the equivalent to the following one:
-    // this.setState({'username': value});
     this.setState({ [key]: value });
   }
   editProfile() {
+    const authHeaders = new Headers();
+    authHeaders.append("Content-Type", "application/json");
+    authHeaders.append("token", localStorage.getItem("token"));
     fetch(`${getDomain()}/users/${this.state.user.id}`, {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: authHeaders,
       body: JSON.stringify({
         id: this.state.user.id,
         username: this.state.username,
@@ -105,7 +108,11 @@ class EditProfile extends Component {
               <TextField
                 type="text"
                 margin="normal"
+                value={this.state.username}
                 label="New Username"
+                InputLabelProps={{
+                  shrink: true
+                }}
                 fullWidth
                 onChange={e => {
                   this.handleInputChange("username", e.target.value);
@@ -114,9 +121,13 @@ class EditProfile extends Component {
             </ListItem>
             <ListItem>
               <TextField
-                type="text"
+                type="date"
                 label="New Birthdate"
+                value={this.state.birthdate}
                 fullWidth
+                InputLabelProps={{
+                  shrink: true
+                }}
                 onChange={e => {
                   this.handleInputChange("birthdate", e.target.value);
                 }}
