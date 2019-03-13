@@ -7,7 +7,6 @@ import { List, Typography } from "@material-ui/core";
 import Player from "./Player";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { authHeaders } from "../../helpers/restHeaders";
 
 const Container = styled(BaseContainer)`
   margin-top: 20px;
@@ -59,7 +58,9 @@ class Game extends React.Component {
   componentDidMount() {
     fetch(`${getDomain()}/users`, {
       method: "GET",
-      headers: authHeaders
+      headers: {
+        "Content-Type": "application/json"
+      }
     })
       .then(response => response.json())
       .then(async users => {

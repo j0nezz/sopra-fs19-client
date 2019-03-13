@@ -16,7 +16,6 @@ import Avatar from "@material-ui/core/Avatar";
 import {AccountCircle, Edit } from "@material-ui/icons";
 import {OnlineBadge, StyledCard} from "./SharedProfileElements";
 import Moment from 'react-moment';
-import {authHeaders} from "../../helpers/restHeaders";
 
 
 class Profile extends React.Component {
@@ -28,7 +27,9 @@ class Profile extends React.Component {
   }
   componentDidMount() {
     const userId = this.props.match.params.userId;
-
+    const authHeaders = new Headers();
+    authHeaders.append("Content-Type", "application/json");
+    authHeaders.append("token", localStorage.getItem("token"));
 
     fetch(`${getDomain()}/users/${userId}`, {
       method: "GET",
