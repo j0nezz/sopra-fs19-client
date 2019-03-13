@@ -60,7 +60,7 @@ class Profile extends React.Component {
         <CardContent>
           <TitleContainer>
             <Button>
-              <ChevronLeft onClick={() => this.props.history.go(-1)} />
+              <ChevronLeft onClick={() => this.props.history.push("/game")} />
             </Button>
             <Typography variant="h6">User Details</Typography>
             {parseInt(user.id) === parseInt(localStorage.getItem("userId")) ?
