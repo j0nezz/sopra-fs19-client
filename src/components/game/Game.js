@@ -56,11 +56,12 @@ class Game extends React.Component {
   }
 
   componentDidMount() {
+    const authHeaders = new Headers();
+    authHeaders.append("Content-Type", "application/json");
+    authHeaders.append("token", localStorage.getItem("token"));
     fetch(`${getDomain()}/users`, {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      }
+      headers: authHeaders
     })
       .then(response => response.json())
       .then(async users => {
