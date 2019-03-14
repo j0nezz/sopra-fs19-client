@@ -49,12 +49,16 @@ class Login extends React.Component {
     })
       .then(response => response.json())
       .then(returnedUser => {
-        const user = new User(returnedUser);
-        localStorage.setItem("token", user.token);
-        localStorage.setItem("name", user.name);
-        localStorage.setItem("userId", user.id);
-        // user authentication successfully worked --> navigate to the route /game in the GameRouter
-        this.props.history.push(`/game`);
+        if (returnedUser.status > 299) {
+          alert(returnedUser.message);
+        } else {
+          const user = new User(returnedUser);
+          localStorage.setItem("token", user.token);
+          localStorage.setItem("name", user.name);
+          localStorage.setItem("userId", user.id);
+          // user authentication successfully worked --> navigate to the route /game in the GameRouter
+          this.props.history.push(`/game`);
+        }
       })
       .catch(err => {
         if (err.message.match(/Failed to fetch/)) {
