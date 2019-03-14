@@ -21,6 +21,9 @@ class EditProfile extends Component {
     };
   }
   componentDidMount() {
+    /**
+     * Fetch user data of current user profile
+     */
     const authHeaders = new Headers();
     authHeaders.append("Content-Type", "application/json");
     authHeaders.append("token", localStorage.getItem("token"));
@@ -49,6 +52,10 @@ class EditProfile extends Component {
   handleInputChange(key, value) {
     this.setState({ [key]: value });
   }
+
+  /**
+   * send request to update Profile
+   */
   editProfile() {
     const authHeaders = new Headers();
     authHeaders.append("Content-Type", "application/json");
@@ -77,6 +84,7 @@ class EditProfile extends Component {
         }
       });
   }
+
   render() {
     const { user } = this.state;
     return (

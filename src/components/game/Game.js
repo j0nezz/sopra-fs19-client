@@ -8,6 +8,9 @@ import Player from "./Player";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
+/**
+ * Styled components
+ */
 const Container = styled(BaseContainer)`
   margin-top: 20px;
   color: white;
@@ -28,6 +31,9 @@ class Game extends React.Component {
     };
   }
 
+  /**
+   * Logout: delete token in local storage and send request to backend
+   */
   logout() {
     fetch(`${getDomain()}/logout`, {
       method: "POST",
@@ -56,6 +62,9 @@ class Game extends React.Component {
   }
 
   componentDidMount() {
+    /**
+     * Fetch all users
+     */
     const authHeaders = new Headers();
     authHeaders.append("Content-Type", "application/json");
     authHeaders.append("token", localStorage.getItem("token"));

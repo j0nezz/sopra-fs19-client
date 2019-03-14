@@ -127,8 +127,7 @@ class Login extends React.Component {
           <Typography style={{ marginTop: 20 }} variant="subtitle1">
             Don't have an Account?{" "}
             <Link component={NavLink} to={"/register"}>
-              {" "}
-              Sign up{" "}
+              Sign up
             </Link>
           </Typography>
         </CardContent>
